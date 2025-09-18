@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+    <Button
+            android:text="Button"
+            android:layout_width="406dp"
+            android:layout_height="37dp" android:id="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="409dp"
+            android:layout_height="692dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent">
+        <Button
+                android:text="Buscar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/xButtonSearch"/>
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/spinner"/>
+        <Button
+                android:text="Conectar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/xButtonConnect"/>
+        <TextView
+                android:text="Controles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/xTextView"
+                android:fontFamily="sans-serif-black" android:textSize="20sp" android:textAlignment="center"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <Button
+                    android:text="Led1ON"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/xButtonLed1On" android:layout_weight="1"
+                    android:textColorLink="#04425D"/>
+            <Button
+                    android:text="Led2On"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/xButtonLed2On" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <Button
+                    android:text="Led1Off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/xButtonLed1Off" android:layout_weight="1"/>
+            <Button
+                    android:text="Led2Off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/xButtonLed2Off" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/btn_star_big_on"
+                    android:id="@+id/imageView3"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
