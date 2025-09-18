@@ -1,0 +1,386 @@
+############################### EJEMPLO 1 ###############################################
+----------------------------  PRIMER ACTIVITY -------------------------------------------
+||||||||||||||||||||||||||||  MainActivity.java   |||||||||||||||||||||||||||||||||||||||
+public class MainActivity extends Activity{
+    EditText jet;
+    Button jbn;
+    Bundle bdl;
+    Intent itn;
+
+    @Override
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        jet = (EditText) findViewById(R.id.xet);
+        jbn = (Button) findViewById(R.id.xbn);
+        jbn.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                itn = new Intent(MainActivity.this, SecondActivity.class);
+                bdl = new Bundle();
+                bdl.putString("NOMBRE", jet.getText().toString());
+                itn.putExtras(bdl);
+                startActivity(itn);
+            }
+        });
+    }
+}
+
+||||||||||||||||||||||||||    activity_main.xml   |||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+            android:text="@string/escribir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <EditText
+            android:id="@+id/xet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <Button
+            android:id="@+id/xbn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aceptar" />
+
+</LinearLayout>
+-----------------------------------------------------------------------------------------
+----------------------------  SEGUNDA ACTIVITY ------------------------------------------
+||||||||||||||||||||||||||||  SecondActivity.java   |||||||||||||||||||||||||||||||||||||||
+public class SecondActivity extends Activity {
+    EditText jet;
+    Bundle bdl;
+
+    @Override
+    public void onCreate(Bundle b){
+        super.onCreate(b);
+        setContentView(R.layout.activity_second);
+        jet = (EditText) findViewById(R.id.xet1);
+        bdl = getIntent().getExtras();
+        jet.append("Hola " + bdl.getString("NOMBRE"));
+    }
+}
+
+||||||||||||||||||||||||||    activity_second.xml   |||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/activity_second"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/xtv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Segunda actividad:" />
+
+    <EditText
+            android:id="@+id/xet1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>
+-----------------------------------------------------------------------------------------
+#########################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################### EJERCICIO 1 ###############################################
+----------------------------  PRIMER ACTIVITY -------------------------------------------
+||||||||||||||||||||||||||||  MainActivity.java   |||||||||||||||||||||||||||||||||||||||
+public class MainActivity extends Activity{
+    EditText editTextA;
+    EditText editTextB;
+    EditText editTextC;
+    Button jbn;
+    Bundle bdl;
+    Intent itn;
+
+    @Override
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        editTextA =findViewById(R.id.editTextTextA);
+        editTextB =findViewById(R.id.editTextTextB);
+        editTextC =findViewById(R.id.editTextTextC);
+        jbn = findViewById(R.id.buttonSolve);
+        jbn.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                itn = new Intent(MainActivity.this, SecondActivity.class);
+                bdl = new Bundle();
+                bdl.putString("a", editTextA.getText().toString());
+                bdl.putString("b", editTextB.getText().toString());
+                bdl.putString("c", editTextC.getText().toString());
+                itn.putExtras(bdl);
+                startActivity(itn);
+            }
+        });
+    }
+}
+
+||||||||||||||||||||||||||    activity_main.xml   |||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/activity_second"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/xtv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resultado:"/>
+
+    <EditText
+            android:id="@+id/xet1"
+            android:layout_width="407dp"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
+-----------------------------------------------------------------------------------------
+----------------------------  SEGUNDA ACTIVITY ------------------------------------------
+||||||||||||||||||||||||||||  SecondActivity.java   |||||||||||||||||||||||||||||||||||||||
+public class SecondActivity extends Activity {
+    EditText jet;
+    Bundle bdl;
+
+    @Override
+    public void onCreate(Bundle b){
+        super.onCreate(b);
+        setContentView(R.layout.activity_second);
+        jet = findViewById(R.id.xet1);
+        bdl = getIntent().getExtras();
+        jet.append(solveQuadratic(bdl.getString("a"),bdl.getString("b"),bdl.getString("c")));
+    }
+
+    private String solveQuadratic(String A, String B, String C) {
+        try {
+            // Convertir strings a doubles para manejar decimales
+            double a = Double.parseDouble(A);
+            double b = Double.parseDouble(B);
+            double c = Double.parseDouble(C);
+
+            double discriminante = b * b - 4 * a * c;
+
+            if (discriminante < 0) {
+                return "No existen soluciones reales (discriminante negativo)";
+            } else if (discriminante == 0) {
+                double x = -b / (2 * a);
+                return String.format("Solución única: x = %.2f", x);
+            } else {
+                double sqrtDiscriminante = Math.sqrt(discriminante);
+                double x1 = (-b + sqrtDiscriminante) / (2 * a);
+                double x2 = (-b - sqrtDiscriminante) / (2 * a);
+                return String.format("Dos soluciones: x₁ = %.2f, x₂ = %.2f", x1, x2);
+            }
+
+        } catch (NumberFormatException e) {
+            return "Error: Los parámetros deben ser números válidos";
+        } catch (Exception e) {
+            return "Error al intentar resolver la ecuación cuadrática";
+        }
+    }
+}
+
+||||||||||||||||||||||||||    activity_second.xml   |||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/activity_second"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/xtv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resultado:"/>
+
+    <EditText
+            android:id="@+id/xet1"
+            android:layout_width="407dp"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
+-----------------------------------------------------------------------------------------
+#########################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################### EJERCICIO 2 ###############################################
+----------------------------  PRIMER ACTIVITY -------------------------------------------
+||||||||||||||||||||||||||||  MainActivity.java   |||||||||||||||||||||||||||||||||||||||
+public class MainActivity extends Activity{
+    EditText editTextDivisor;
+    EditText editTextDividendo;
+    Button jbn;
+    Bundle bdl;
+    Intent itn;
+
+    @Override
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        editTextDividendo =findViewById(R.id.editTextTextA);
+        editTextDivisor =findViewById(R.id.editTextTextB);
+        jbn = findViewById(R.id.buttonSolve);
+        jbn.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                itn = new Intent(MainActivity.this, SecondActivity.class);
+                bdl = new Bundle();
+                bdl.putString("divisor", editTextDivisor.getText().toString());
+                bdl.putString("dividendo", editTextDividendo.getText().toString());
+                itn.putExtras(bdl);
+                startActivity(itn);
+            }
+        });
+    }
+}
+
+||||||||||||||||||||||||||    activity_main.xml   |||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/editTextTextA" android:hint="Dividendo"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/editTextTextB" android:hint="Divisor"/>
+    <Button
+            android:text="Resolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/buttonSolve" android:textColorLink="#050705"/>
+</LinearLayout>
+
+-----------------------------------------------------------------------------------------
+----------------------------  SEGUNDA ACTIVITY ------------------------------------------
+||||||||||||||||||||||||||||  SecondActivity.java   |||||||||||||||||||||||||||||||||||||||
+public class SecondActivity extends Activity {
+    EditText jet;
+    Bundle bdl;
+
+    @Override
+    public void onCreate(Bundle b){
+        super.onCreate(b);
+        setContentView(R.layout.activity_second);
+        jet = findViewById(R.id.xet1);
+        bdl = getIntent().getExtras();
+        jet.append(dividir(bdl.getString("dividendo"),bdl.getString("divisor")));
+    }
+
+
+    @SuppressLint("DefaultLocale")
+    private String dividir(String dividendo, String divisor){
+        try {
+            double dividen=Double.parseDouble(dividendo);
+            double diviso=Double.parseDouble(divisor);
+            return String.format("Cociente: 29%.6f",dividen/diviso);
+        }catch (Exception e){
+            return "Asegurate de ingresar los números correctos";
+        }
+    }
+}
+||||||||||||||||||||||||||    activity_second.xml   |||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/activity_second"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/xtv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resultado:"/>
+
+    <EditText
+            android:id="@+id/xet1"
+            android:layout_width="407dp"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
+-----------------------------------------------------------------------------------------
+#########################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+############################### EJERCICIO 3 ###############################################
+----------------------------  PRIMER ACTIVITY -------------------------------------------
+||||||||||||||||||||||||||||  MainActivity.java   |||||||||||||||||||||||||||||||||||||||
+
+||||||||||||||||||||||||||    activity_main.xml   |||||||||||||||||||||||||||||||||||||||
+
+-----------------------------------------------------------------------------------------
+----------------------------  SEGUNDA ACTIVITY ------------------------------------------
+||||||||||||||||||||||||||||  SecondActivity.java   |||||||||||||||||||||||||||||||||||||||
+
+
+||||||||||||||||||||||||||    activity_second.xml   |||||||||||||||||||||||||||||||||||||||
+
+-----------------------------------------------------------------------------------------
+#########################################################################################

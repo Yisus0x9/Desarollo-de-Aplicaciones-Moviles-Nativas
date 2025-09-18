@@ -1,0 +1,103 @@
+###############################EJEMPLO#####################################
+-------------------------PRIMER ACTIVITY-----------------------------------
+|||||||||||||||||||||||||   JAVA    ||||||||||||||||||||||||||||||||||||||||
+/*
+La clase Inent se usa para invocar activities, a veces es necesarios pasar parametros
+de un activity al que se va a lanzar, para ello usamos el método  Intent putExtras(android.os.Bundle extras).
+
+La clase Bundle en Android es una estructura de datos clave-valor que sirve
+para transportar y almacenar información entre diferentes componentes de una aplicación.
+ Es fundamental para la comunicación entre Activities, Fragments y otros componentes ya que se encarga de transportar y/o recibir recursos.
+ */
+
+public class MainActivity extends Activity{
+    EditText jet;
+    Button jbn;
+    Bundle bdl;
+    Intent itn;
+
+    @Override
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        jet = (EditText) findViewById(R.id.xet);
+        jbn = (Button) findViewById(R.id.xbn);
+        jbn.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                itn = new Intent(MainActivity.this, SecondActivity.class);
+                bdl = new Bundle();
+                bdl.putString("NOMBRE", jet.getText().toString());
+                itn.putExtras(bdl);
+                startActivity(itn);
+            }
+        });
+    }
+}
+
+|||||||||||||||||||||||||   XML     ||||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+            android:text="@string/escribir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <EditText
+            android:id="@+id/xet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <Button
+            android:id="@+id/xbn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aceptar" />
+
+</LinearLayout>
+---------------------------------------------------------------------------
+
+------------------------SEGUNDO ACTIVITY-----------------------------------
+|||||||||||||||||||||||||   JAVA    ||||||||||||||||||||||||||||||||||||||||
+public class SecondActivity extends Activity {
+    EditText jet;
+    Bundle bdl;
+
+    @Override
+    public void onCreate(Bundle b){
+        super.onCreate(b);
+        setContentView(R.layout.activity_second);
+        jet = (EditText) findViewById(R.id.xet1);
+        bdl = getIntent().getExtras();
+        jet.append("Hola " + bdl.getString("NOMBRE"));
+    }
+}
+
+|||||||||||||||||||||||||   XML     ||||||||||||||||||||||||||||||||||||||||
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/activity_second"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/xtv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Segunda actividad:" />
+
+    <EditText
+            android:id="@+id/xet1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>
+---------------------------------------------------------------------------
+
+###############################FIN EJEMPLO#################################
