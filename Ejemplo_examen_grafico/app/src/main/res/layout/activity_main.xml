@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" tools:context=".MainActivity">
+
+        <TextView
+                android:text="Dibujo Recursivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textViewTitle" android:textAlignment="center"
+                android:textSize="20sp" android:textStyle="bold" android:textColorLink="#783636"/>
+        <TextView
+                android:text="Tamaño del lado del cuadrado:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView2" android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/editTextTextSize"/>
+        <TextView
+                android:text="Color del circulo:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView3" android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerColors"
+                android:prompt="@string/colores"
+                android:entries="@array/color_ops"
+                tools:ignore="HardcodedText"/>
+        <TextView
+                android:text="Repeticiones:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView4" android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextNumberTimes" android:hint="Ingresa las veces que de repetira el patron"/>
+        <Button
+                android:text="Dibujar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/buttonDraw"/>
+</LinearLayout>
